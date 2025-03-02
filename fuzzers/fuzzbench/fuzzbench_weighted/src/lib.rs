@@ -29,7 +29,9 @@ use libafl::{
         StdMOptMutator, StdScheduledMutator, Tokens,
     },
     observers::{CanTrack, HitcountsMapObserver, TimeObserver},
-    schedulers::{IndexesLenTimeMinimizerScheduler, StdWeightedScheduler},
+    schedulers::{
+        powersched::PowerSchedule, IndexesLenTimeMinimizerScheduler, StdWeightedScheduler,
+    },
     stages::{
         calibrate::CalibrationStage, power::StdPowerMutationalStage, StdMutationalStage,
         TracingStage,
@@ -303,6 +305,7 @@ fn fuzz(
         5,
     )?;
 
+    let power = StdPowerMutationalStage::new(mutator);
 
     // A minimization+queue policy to get testcasess from the corpus
     let scheduler = IndexesLenTimeMinimizerScheduler::new(
