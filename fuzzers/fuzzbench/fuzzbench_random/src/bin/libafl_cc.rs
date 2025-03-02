@@ -38,4 +38,4 @@ pub fn main() {
     } else {
         panic!("LibAFL CC: No Arguments given");
     }
-} w
+} 
