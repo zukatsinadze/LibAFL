@@ -6,6 +6,8 @@ use core::{fmt::Debug, time::Duration};
 use libafl_bolts::current_time;
 use serde::{de::DeserializeOwned, Serialize};
 
+use std::thread;
+use std::time::Duration;
 use crate::{
     corpus::{Corpus, CorpusId, HasCurrentCorpusId, HasTestcase, Testcase},
     events::{Event, EventConfig, EventFirer, EventProcessor, ProgressReporter},
@@ -242,7 +244,8 @@ where
     ) -> Result<(), Error> {
         let monitor_timeout = STATS_TIMEOUT_DEFAULT;
         loop {
-            // log::info!("Starting another fuzz_loop");
+            log::info!("Starting another fuzz_loop");
+            thread::sleep(Duration::from_secs(1)); 
             manager.maybe_report_progress(state, monitor_timeout)?;
             self.fuzz_one(stages, executor, state, manager)?;
         }
