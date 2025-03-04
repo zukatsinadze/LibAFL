@@ -7,7 +7,6 @@ use libafl_bolts::current_time;
 use serde::{de::DeserializeOwned, Serialize};
 
 use std::thread;
-use std::time::Duration;
 use crate::{
     corpus::{Corpus, CorpusId, HasCurrentCorpusId, HasTestcase, Testcase},
     events::{Event, EventConfig, EventFirer, EventProcessor, ProgressReporter},
